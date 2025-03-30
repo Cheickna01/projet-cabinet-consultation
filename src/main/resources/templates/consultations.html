@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+      xmlns:th="https://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+
+    <title>Consultations</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+    <h1>Liste des consultations</h1>
+    <a class="btn btn-primary mb-3" th:href="@{/consultation/new}">Nouvelle consultation</a>
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Nom du patient</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="c : ${consultations}">
+            <th scope="row" th:text="${c.idConsultation}"></th>
+            <td th:text="${c.dateConsultation}"></td>
+            <td th:text="${c.description}"></td>
+            <td th:text="${c.patient.getNom()}"></td>
+            <td>
+                <a th:href="@{/consultations/update(id= ${c.idConsultation})}" class="btn btn-secondary">Modifier</a>
+                <a th:href="@{/consultations/delete(id= ${c.idConsultation})}" class="btn btn-danger">Supprimer</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+
+</html>
